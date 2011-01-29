@@ -12,6 +12,7 @@ public final class R {
     }
     public static final class color {
         public static final int black=0x7f060000;
+        public static final int white=0x7f060001;
     }
     public static final class drawable {
         public static final int back=0x7f020000;
@@ -47,10 +48,10 @@ public final class R {
         public static final int help_pressed=0x7f02001e;
         public static final int helpbg=0x7f02001f;
         public static final int icon=0x7f020020;
-        public static final int options=0x7f020021;
-        public static final int options_highlighted=0x7f020022;
-        public static final int options_pressed=0x7f020023;
-        public static final int optionsbg=0x7f020024;
+        public static final int mobb1=0x7f020021;
+        public static final int mobb2=0x7f020022;
+        public static final int mobb3=0x7f020023;
+        public static final int mobb4=0x7f020024;
         public static final int start=0x7f020025;
         public static final int start_pressed=0x7f020026;
         public static final int startgame=0x7f020027;

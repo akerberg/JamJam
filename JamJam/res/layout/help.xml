@@ -19,7 +19,7 @@ android:layout_marginLeft="2px" android:layout_marginTop="2px" android:backgroun
  <TextView android:id="@+id/TEXT_VIEW"
  android:layout_width="wrap_content"
  android:layout_height="wrap_content"
- android:textColor="@color/black" android:textSize="16px" android:text="
+ android:textColor="@color/white" android:textSize="20px" android:text="
  
  Are you the one that will change history? 
  Can you save the last male Dodo bird on the planet and save the entire race from EXTINCTION? 
