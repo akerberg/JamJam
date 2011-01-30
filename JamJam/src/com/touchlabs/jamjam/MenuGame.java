@@ -1,23 +1,14 @@
 package com.touchlabs.jamjam;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Window;
-import android.widget.Toast;
+import android.view.WindowManager;
 
 
 public class MenuGame extends Activity {
@@ -39,7 +30,16 @@ public class MenuGame extends Activity {
         SoundManager mSoundManager = new SoundManager(getBaseContext());	
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-         gamePreview = new GamePreview(this,mSoundManager); 
+        
+        DisplayMetrics metrics = new DisplayMetrics();
+        	getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        
+    	//Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay(); 
+    	int width = metrics.widthPixels;
+    	int height = metrics.heightPixels;
+    	
+        	
+         gamePreview = new GamePreview(this,mSoundManager,width,height); 
          setContentView(gamePreview);        
     }
 

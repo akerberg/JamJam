@@ -8,12 +8,22 @@ public class PowerUp {
 	private int yPos;
 	private int speed;
 	private float startTime;
-	Random generator = new Random();
-	int type;
+	private Random generator = new Random();
+	private int type;
+	private int dif = 0;
+
+	private int y3 = 240;
+	private int y2 = 140;
+	private int y1 = 40;
 	
-	public PowerUp(){
-		speed = 100;
+	public PowerUp(float scale_x, float scale_y){
+		speed = (int) (100 * scale_x);
+		dif = (int) (600 * scale_x);
+		y3 *= scale_y;
+		y2 *= scale_y;
+		y1 *= scale_y;
 		newPos();
+		
 	}
 
 	public void setSpeed(double newspeed){
@@ -25,21 +35,21 @@ public class PowerUp {
 	}
 	
 	public int getY(){
-		return yPos - 80;
+		return yPos;
 	}
 	
 	public void updatePowerUp(float timeDelta){
 		startTime -= timeDelta;
 		if(startTime < 0) {	
 			xPos -= timeDelta * speed;
-			if(xPos < -100) {
+			if(xPos < -dif/6) {
 				newPos();
 			}
 		}
 	}
 	
 	private void newPos() {
-		xPos = 600;
+		xPos = dif;
 
 		int type2 = generator.nextInt(4);
 		if (type2 == 3)
@@ -50,11 +60,11 @@ public class PowerUp {
 			
 		int floor = generator.nextInt(3);
 		if(floor == 0)
-			yPos = 120;
+			yPos = y1;
 		else if (floor == 1)
-			yPos = 220;
+			yPos = y2;
 		else 
-			yPos = 320;
+			yPos = y3;
 		startTime = 5 + (generator.nextInt(20) + 1);
 	}
 	

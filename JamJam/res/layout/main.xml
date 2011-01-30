@@ -8,10 +8,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 >
 <TableLayout
 android:id="@+id/widget28"
-android:layout_width="295px"
+android:layout_width="200dp"
 android:orientation="vertical"
 android:layout_centerVertical="true"
-android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_height="235px">
+android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_height="180dp">
 <Button
 android:id="@+id/StartGame"
 android:layout_width="wrap_content"
@@ -25,7 +25,6 @@ android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:background="@layout/help_button">
 </Button>
-
 
 <Button
 android:id="@+id/Credits"

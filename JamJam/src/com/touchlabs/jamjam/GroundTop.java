@@ -1,14 +1,18 @@
 package com.touchlabs.jamjam;
 
+import android.util.Log;
+
 public class GroundTop {
 	private int xPos;
 	private int yPos;
 	private int speed;
+	private int dif = 600;
 	
-	public GroundTop(){
+	public GroundTop(float scale_x, float scale_y){
 		xPos = 0;
-		yPos = 100;
-		speed = 100;
+		yPos = (int) (100 * scale_y);
+		speed = (int) (100 * scale_x);
+		//dif = (int) (dif * scale_x);
 	}
 	
 	public void setSpeed(double newspeed){
@@ -19,8 +23,8 @@ public class GroundTop {
 		return xPos;
 	}
 	
-	public int getX2(){
-		return xPos + 600;
+	public int getX2(int new_width){
+		return xPos + new_width;
 	}
 	
 	public int getY(){
@@ -29,7 +33,7 @@ public class GroundTop {
 	
 	public void setXPos(float timeDelta){
 		xPos -= timeDelta * speed;
-		if(xPos < -600)
+		if(xPos < -dif)
 			xPos = 0;
 	}
 }

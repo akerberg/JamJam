@@ -4,11 +4,13 @@ public class GroundBot {
 	private int xPos;
 	private int yPos;
 	private int speed;
+	private int dif = 600;
 	
-	public GroundBot(){
+	public GroundBot(float scale_x, float scale_y){
 		xPos = 0;
-		yPos = 300;
-		speed = 100;
+		yPos = (int) (300 * scale_y);
+		speed = (int) (100 * scale_x);
+		//dif = (int) (600 * scale_x);
 	}
 	
 	public void setSpeed(double newspeed){
@@ -19,8 +21,8 @@ public class GroundBot {
 		return xPos;
 	}
 	
-	public int getX2(){
-		return xPos + 600;
+	public int getX2(int new_width){
+		return xPos + new_width;
 	}
 	
 	public int getY(){
@@ -29,7 +31,7 @@ public class GroundBot {
 	
 	public void setXPos(float timeDelta){
 		xPos -= timeDelta * speed;
-		if(xPos < -600)
+		if(xPos < -dif)
 			xPos = 0;
 	}
 	

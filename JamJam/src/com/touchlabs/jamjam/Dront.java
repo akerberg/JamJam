@@ -13,10 +13,33 @@ public class Dront {
 	private float mAnimationWalk = 1.8f;
 	private SoundManager mSoundManager;
 	private int tempImage = R.drawable.d1;
+
+	private int y3 = 220;
+	private int y2 = 120;
+	private int y1 = 20;
+	
+	private int x4 = 200;
+	private int x3 = 150;
+	private int x2 = 100;
+	private int x1 = 50;
 	
 	//Constructor
-	public Dront(SoundManager ms) {
+	public Dront(SoundManager ms, float scale_x, float scale_y) {
 		mSoundManager = ms;
+		xPos = (int) (150 * scale_x);
+		
+		x4 *= scale_x;
+		x3 *= scale_x;
+		x2 *= scale_x;
+		x1 *= scale_x;
+		
+		y3 *= scale_y;
+		y2 *= scale_y;
+		y1 *= scale_y;
+		
+		yPos = (int) (220 * scale_y);
+		speedX = (int) (speedX * scale_x);
+		speedY = (int) (speedY * scale_y);
 	}
 	
 	//Return actual pos X
@@ -147,81 +170,81 @@ public class Dront {
 		
 		//Dront moves?
 		if (gridY == 0) {
-			if (yPos < 220) {
+			if (yPos < y3) {
 				yPos += speedY * timeDelta; 
-				if (yPos > 220)
-					yPos = 220;			
+				if (yPos > y3)
+					yPos = y3;			
 			}
-			else yPos = 220;			
+			else yPos = y3;			
 		}
 		else if (gridY == 1) {
-			if (yPos > 120) {
+			if (yPos > y2) {
 				yPos -= speedY * timeDelta;
-				if (yPos < 120)
-					yPos = 120;
+				if (yPos < y2)
+					yPos = y2;
 			}
-			else if (yPos < 120) {
+			else if (yPos < y2) {
 				yPos += speedY * timeDelta; 
-				if (yPos > 120)
-					yPos = 120;
+				if (yPos > y2)
+					yPos = y2;
 			}
-			else yPos = 120;
+			else yPos = y2;
 		}
 		else if (gridY == 2) {
-			if (yPos > 20) {
+			if (yPos > y1) {
 				yPos -= speedY * timeDelta; 
-				if (yPos < 20)
-					yPos = 20;			
+				if (yPos < y1)
+					yPos = y1;			
 			}
-			else yPos = 20;		
+			else yPos = y1;	
 		}
 		
 		//Dront gets hit or power up
 		if (gridX == 4) {
-			if (xPos < 200) {
+			if (xPos < x4) {
 				xPos += speedX * timeDelta; 
-				if (xPos > 200)
-					xPos = 200;
-			} else xPos = 200;			
+				if (xPos > x4)
+					xPos = x4;
+			} else xPos = x4;			
 		}
 		else if (gridX == 3) {
-			if (xPos > 150) {
+			if (xPos > x3) {
 				xPos -= speedX * timeDelta; 
-				if (xPos < 150)
-					xPos = 150; 				
+				if (xPos < x3)
+					xPos = x3; 				
 			}
-			else if (xPos < 150) {
+			else if (xPos < x3) {
 				xPos += speedX * timeDelta; 
-				if (xPos > 150)
-					xPos = 150;
+				if (xPos > x3)
+					xPos = x3;
 			} 			
-			else xPos = 150;			
+			else xPos = x3;			
 		}
 		else if (gridX == 2) {
-			if (xPos > 100) {
+			if (xPos > x2) {
 				xPos -= speedX * timeDelta; 
-				if (xPos < 100)
-					xPos = 100; 				
+				if (xPos < x2)
+					xPos = x2; 				
 			}
-			else if (xPos < 100) {
+			else if (xPos < x2) {
 				xPos += speedX * timeDelta; 
-				if (xPos > 100)
-					xPos = 100;
+				if (xPos > x2)
+					xPos = x2;
 			} 			
-			else xPos = 100;			
+			else xPos = x2;			
 		}
 		else if (gridX == 1) {
-			if (xPos > 50) {
+			if (xPos > x1) {
 				xPos -= speedX * timeDelta; 
-				if (xPos < 50)
-					xPos = 50; 				
+				if (xPos < x1)
+					xPos = x1; 				
 			}
-			else if (xPos < 50) {
+			else if (xPos < x1) {
 				xPos += speedX * timeDelta; 
-				if (xPos > 50)
-					xPos = 50;
+				if (xPos > x1)
+					xPos = x1;
 			} 			
-			else xPos = 50;			
+			else xPos = x1;			
 		}
 		else if (gridX == 0) {
 			if (xPos > 0) {

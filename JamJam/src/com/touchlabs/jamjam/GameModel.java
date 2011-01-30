@@ -35,31 +35,42 @@ public class GameModel implements java.io.Serializable {
 	private float mAnimationHand = 0.8f;
 	private float mAnimation;
 
+	private int collosionAreaX = 70;
+	private int collosionAreaY = 80;
+	private int speed = 100;
+	
 	private Context context;
 	private SoundManager mSoundManager;
 	/**
 	 * Constructor
 	 */
-	public GameModel(SoundManager sm) {
+	
+	public GameModel(SoundManager sm, float scale_x, float scale_y) {
 
-		mSoundManager = sm;
-		groundTop = new GroundTop();
-		groundMid = new GroundMid();
-		groundBot = new GroundBot();
-
-		mDront = new Dront(mSoundManager);
-		mPowerUp = new PowerUp();
+		collosionAreaX *= scale_x;
+		collosionAreaY *= scale_y;
+		speed *= scale_x;
 		
-		mBg = new Background();
+		mSoundManager = sm;
+		groundTop = new GroundTop(scale_x, scale_y);
+		groundMid = new GroundMid(scale_x, scale_y);
+		groundBot = new GroundBot(scale_x, scale_y);
+		
+		globalGameSpeed *= scale_x;
+
+		mDront = new Dront(mSoundManager, scale_x, scale_y);
+		mPowerUp = new PowerUp(scale_x, scale_y);
+		
+		mBg = new Background(scale_x);
 		
 		Random generator = new Random();
 		for(int i = 0; i < 6; i++){
 			if (i == 0 || i == 1)
-				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 1));
+				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 1,scale_x, scale_y));
 			if (i == 2 || i == 3)
-				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 2));
+				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 2,scale_x, scale_y));
 			if (i == 4 || i == 5)
-				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 3));
+				listEnemyWall.add(new EnemyWall((generator.nextInt(9) + 1), 3,scale_x, scale_y));
 		}
 	}
 	
@@ -104,8 +115,8 @@ public class GameModel implements java.io.Serializable {
 			
 			int count = listEnemyWall.size();
 
-			if(mDront.getX() + 80 > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
-				if(mDront.getY() + 80 > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +80){
+			if(mDront.getX() + collosionAreaX > mPowerUp.getX() && mDront.getX() < mPowerUp.getX()){
+				if(mDront.getY() + collosionAreaY > mPowerUp.getY() && mDront.getY() < mPowerUp.getY() +collosionAreaY){
 					if (mPowerUp.getType() == 0){
 						mDront.drontPowerUp();
 						distance += 1;
@@ -114,8 +125,8 @@ public class GameModel implements java.io.Serializable {
 					else if (mPowerUp.getType() == 1)  {
 						
 						globalGameSpeed *= 0.5;
-						if(globalGameSpeed < 100)
-							globalGameSpeed = 100;
+						if(globalGameSpeed < speed)
+							globalGameSpeed = speed;
 						mDront.setAnimationWalk(1.8f);
 						//Update speed for all 
 						//Update speed for walls
@@ -234,9 +245,10 @@ public class GameModel implements java.io.Serializable {
 			}
 			
 			
+			//Collision detection
 			for(int i = 0; i < count; i++){
-				if(mDront.getX() + 80 > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
-					if(mDront.getY() + 80 > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +80){
+				if(mDront.getX() + collosionAreaX > listEnemyWall.get(i).getX1() && mDront.getX() < listEnemyWall.get(i).getX1()){
+					if(mDront.getY() + collosionAreaY > listEnemyWall.get(i).getY() && mDront.getY() < listEnemyWall.get(i).getY() +collosionAreaY){
 						mDront.hitDront();
 						mSoundManager.playSound(1);
 						distance -= 1;

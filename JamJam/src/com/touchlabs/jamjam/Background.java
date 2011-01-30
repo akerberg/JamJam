@@ -2,12 +2,15 @@ package com.touchlabs.jamjam;
 
 public class Background {
 	private int xPos = 0;
-	private int xPos2 = 1068;
+	private int dif = 0;
 	private int speed;
 	private int temp;
 	
-	public Background(){
-		speed = 23;
+	private boolean x1first = true;
+	
+	public Background(float scale_x){
+		speed = (int) (23 * scale_x);
+		//dif =  (int) (dif * scale_x);
 	}
 	
 	public int getImage(){
@@ -15,23 +18,24 @@ public class Background {
 	}
 	
 	
-	public int getX(){
+	public int getX1(int width){		
+		dif = width;
 		return xPos;
 	}
-	
-	public int getX2(){
-		return xPos2;
+		
+	public boolean getFirst(){
+		return x1first;
 	}
-	
 	
 	public void setXPos(float timeDelta){
 		temp = Double.valueOf(timeDelta * speed).intValue();
 		xPos -= temp;//timeDelta * speed;
-		xPos2 -= temp;// timeDelta * speed;
-		if(xPos <= -1068)
-			xPos = xPos2 + 1068;
 		
-		if(xPos2 <= -1068)
-			xPos2 = xPos + 1068;
+		if(xPos <= -dif) {
+			xPos = 0;
+			if (x1first)
+				x1first = false;
+			else x1first = true;
+		}
 	}
 }

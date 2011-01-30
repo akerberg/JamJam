@@ -9,19 +9,23 @@ public class EnemyWall {
 	private int speed;
 	private float startTime;
 	private boolean doWall = false;
+	int dif = 0;
+	int baseSpeed = 0;
 	
 	Random generator = new Random();
 	
-	public EnemyWall(int randomTime, int floor){
-		xPos = 600;
+	public EnemyWall(int randomTime, int floor, float scale_x, float scale_y){
+		dif = (int) (600 * scale_x);
+		xPos = dif;
 		if(floor == 1)
-			yPos = 100;
+			yPos = (int) (20 * scale_y);
 		else if(floor == 2)
-			yPos = 200;
+			yPos = (int) (120 * scale_y);
 		else if (floor == 3)
-			yPos = 300;
+			yPos = (int) (220 * scale_y);
 		
-		speed = 100;
+		speed = (int) (100 * scale_x);
+		baseSpeed = speed;
 		startTime = randomTime;
 	}
 	
@@ -38,7 +42,7 @@ public class EnemyWall {
 	}
 	
 	public int getY(){
-		return yPos - 80;
+		return yPos;
 	}
 	
 	public boolean updateWall(float timeDelta, boolean spawnWall){
@@ -53,7 +57,7 @@ public class EnemyWall {
 
 		if(startTime < 0 && doWall){	
 			xPos -= timeDelta * speed;
-			if(xPos < -100){
+			if(xPos < -dif/6){
 				startTime = (generator.nextInt(15) + 1);
 				setNewRandomTime();				
 			}
@@ -62,8 +66,8 @@ public class EnemyWall {
 	}
 	
 	public void setNewRandomTime(){
-		xPos = 600;
-		double tmp = 100;
+		xPos = dif;
+		double tmp = baseSpeed;
 		double newtmp = tmp / speed;
 		int rand = Double.valueOf(15 * newtmp).intValue();
 		startTime = (generator.nextInt(rand));
