@@ -66,6 +66,7 @@ public class MenuGame extends Activity {
     public void onRestart() {
     	//Log.i("MenuGame","onRestart()");
     	super.onRestart();
+    	finish();
     }
     
     @Override
@@ -78,23 +79,19 @@ public class MenuGame extends Activity {
     public void onResume() {
     	//Log.i("MenuGame","onResume()");
     	super.onResume();
-    
     }
     
     @Override
     public void onPause() {
     	//Log.i("MenuGame","onPause()");
     	super.onPause();
-    	
-        
-
-    
+    	finish();    
     }
     
     @Override
     public void onDestroy() {
        	//Log.i("MenuGame","onDestroy()");
     	super.onDestroy();
- 
+    	finish(); 
     }
 }

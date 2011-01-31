@@ -42,6 +42,11 @@ public class Dront {
 		speedY = (int) (speedY * scale_y);
 	}
 	
+	public void setSpeed(double newspeed){
+		speedX = Double.valueOf(newspeed).intValue() * 6;
+		speedY = Double.valueOf(newspeed).intValue() * 3;
+	}
+	
 	//Return actual pos X
 	public int getX() {
 		return xPos;		
@@ -106,7 +111,9 @@ public class Dront {
 	}
 	
 	public void setAnimationWalk(float timer){
-		mAnimationWalk *= timer;
+		if (timer == 99f)
+			mAnimationWalk = 1.8f;
+		else mAnimationWalk *= timer;
 	}
 	
 	public int getDrontImage(){

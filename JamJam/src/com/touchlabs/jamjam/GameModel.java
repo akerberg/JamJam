@@ -25,6 +25,7 @@ public class GameModel implements java.io.Serializable {
 	private boolean lost = false;
 	private float incSpeedTimer = 5; //each 10 sec increase the globalGameSpeed
 	private double globalGameSpeed = 100;
+	private double nonScaledGameSpeed = 100;
 	private int distance = 0;
 	private double distanceMeter = 1;
 	private double timeTick = 0;
@@ -124,15 +125,21 @@ public class GameModel implements java.io.Serializable {
 					}
 					else if (mPowerUp.getType() == 1)  {
 						
+						
 						globalGameSpeed *= 0.5;
-						if(globalGameSpeed < speed)
-							globalGameSpeed = speed;
+						nonScaledGameSpeed *= 0.5;
 						mDront.setAnimationWalk(1.8f);
+						if(globalGameSpeed < speed) {
+							globalGameSpeed = speed;
+							nonScaledGameSpeed = 100;
+							mDront.setAnimationWalk(99f);
+						}
 						//Update speed for all 
 						//Update speed for walls
 						for(int i = 0; i < count; i++){
 							listEnemyWall.get(i).setSpeed(globalGameSpeed);
 						}
+						mDront.setSpeed(globalGameSpeed);						
 						groundTop.setSpeed(globalGameSpeed);
 						groundMid.setSpeed(globalGameSpeed);
 						groundBot.setSpeed(globalGameSpeed);
@@ -153,7 +160,7 @@ public class GameModel implements java.io.Serializable {
 			timeTick -= timeDelta;
 			boolean showWall = false;
 			if (timeTick <= 0) {
-				timeTick = 1.5;
+				timeTick = 150/nonScaledGameSpeed;
 				showWall = true;
 			}
 			
@@ -168,7 +175,7 @@ public class GameModel implements java.io.Serializable {
 					if (temp)
 						y1 = 1;
 				}
-				if (i == 1) {
+				else if (i == 1) {
 					boolean temp = false;
 					if (y1 == 1)
 						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
@@ -178,12 +185,12 @@ public class GameModel implements java.io.Serializable {
 							y1 = 1;
 					}
 				}
-				if (i == 2) {
+				else if (i == 2) {
 					boolean temp = listEnemyWall.get(i).updateWall(timeDelta,showWall);
 					if (temp)
 						y2 = 1;
 				}
-				if (i == 3) {
+				else if (i == 3) {
 					boolean temp = false;
 					if (y2 == 1)
 						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
@@ -193,7 +200,7 @@ public class GameModel implements java.io.Serializable {
 							y2 = 1;
 					}
 				}
-				if (i == 4) {
+				else if (i == 4) {
 					boolean temp = false;
 					if (y1 == 1 && y2 == 1)
 						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
@@ -202,7 +209,7 @@ public class GameModel implements java.io.Serializable {
 					if (temp)
 						y3 = 1;
 				}
-				if (i == 5) {
+				else if (i == 5) {
 					boolean temp = false;
 					if (y3 == 1)
 						temp = listEnemyWall.get(i).updateWall(timeDelta,false);
@@ -223,12 +230,14 @@ public class GameModel implements java.io.Serializable {
 			incSpeedTimer -= timeDelta;
 			if(incSpeedTimer < 0){
 				globalGameSpeed *= 1.1;
+				nonScaledGameSpeed *= 1.1;
 				mDront.setAnimationWalk(0.9f);
 				//Update speed for all 
 				//Update speed for walls
 				for(int i = 0; i < count; i++){
 					listEnemyWall.get(i).setSpeed(globalGameSpeed);
 				}
+				mDront.setSpeed(globalGameSpeed);
 				groundTop.setSpeed(globalGameSpeed);
 				groundMid.setSpeed(globalGameSpeed);
 				groundBot.setSpeed(globalGameSpeed);
@@ -238,7 +247,7 @@ public class GameModel implements java.io.Serializable {
 			}
 			
 			//Score in distance
-			distanceMeter += timeDelta * globalGameSpeed * 0.01;
+			distanceMeter += timeDelta * nonScaledGameSpeed * 0.01;
 			if(distanceMeter > 2){
 				distance += 1;
 				distanceMeter = 1;

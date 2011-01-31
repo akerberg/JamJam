@@ -10,7 +10,7 @@ public class GroundMid {
 		xPos = 0;
 		yPos = (int) (200 * scale_y);
 		speed = (int) (100 * scale_x);
-		//dif = (int) (dif * scale_x);
+		dif = (int) (dif * scale_x);
 	}
 	
 	public void setSpeed(double newspeed){

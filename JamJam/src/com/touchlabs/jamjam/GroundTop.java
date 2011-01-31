@@ -12,7 +12,7 @@ public class GroundTop {
 		xPos = 0;
 		yPos = (int) (100 * scale_y);
 		speed = (int) (100 * scale_x);
-		//dif = (int) (dif * scale_x);
+		dif = (int) (dif * scale_x);
 	}
 	
 	public void setSpeed(double newspeed){

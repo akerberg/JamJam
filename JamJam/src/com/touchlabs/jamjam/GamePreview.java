@@ -62,9 +62,6 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 		float you = (float) (this.height) / (float) (this.width);
 
 		aspectratio = you/hero;
-		Log.d("t1",""+hero);
-		Log.d("t2",""+you);
-		Log.d("t3",""+aspectratio);
 		
 		textposx = (int) (240 * scale_x); 
 		textposy = (int) (20 * scale_y);
@@ -299,16 +296,16 @@ public class GamePreview extends SurfaceView implements SurfaceHolder.Callback, 
 			switch(event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				if(!mGameModel.getLost()){
-					if (event.getX() > 0 && event.getX() < touchx) {
+					//if (event.getX() > 0 && event.getX() < touchx) {
 						if (event.getY() > 0 && event.getY() < touchy) {
 							if (mGameModel.getDront().moveDrontDOWN())
 								mSoundManager.playSound(0);									
 						}
-						if (event.getY() > touchy) {
+						else if (event.getY() > touchy) {
 							if (mGameModel.getDront().moveDrontUP())
 								mSoundManager.playSound(0);							
 						}
-					}
+					//}
 				} else {
 					thread.setRunning(false);
 					mBitMapCache = null;
